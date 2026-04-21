@@ -9,6 +9,10 @@ readme = "README.md"
 dynamic = ["version"]
 dependencies = [
     # "frappe~=15.0.0" # Installed and managed by bench.
+    # Bundled ffmpeg binary — used to transcode voice notes to OGG/OPUS
+    # (Meta's WhatsApp API requires real OGG container; browser MediaRecorder
+    # outputs WebM that Meta silently rejects). No system install required.
+    "imageio-ffmpeg>=0.4.9",
 ]
 
 [build-system]

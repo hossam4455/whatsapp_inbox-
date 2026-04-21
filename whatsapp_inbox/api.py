@@ -199,16 +199,26 @@ def send_reply(conversation, message):
     }
 
 
+def _resolve_ffmpeg():
+    """Locate an ffmpeg binary. Prefers imageio-ffmpeg (pip-installed, ships
+    with a bundled binary), falls back to a system ffmpeg on PATH."""
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        import shutil
+        return shutil.which("ffmpeg")
+
+
 def _transcode_audio_to_ogg_opus(src_path):
     """Transcode audio to OGG/OPUS (Meta WhatsApp API compatible). Returns new path or None on failure."""
     import os
-    import shutil
     import subprocess
 
-    ffmpeg = shutil.which("ffmpeg")
+    ffmpeg = _resolve_ffmpeg()
     if not ffmpeg:
         frappe.log_error(
-            "ffmpeg not installed — voice notes cannot be transcoded. Install with: sudo apt install ffmpeg",
+            "ffmpeg binary not available (install imageio-ffmpeg or system ffmpeg).",
             "WhatsApp Voice Transcode",
         )
         return None

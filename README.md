@@ -6,13 +6,8 @@ A modern WhatsApp conversation management app for Frappe / ERPNext, built with V
 
 - Frappe v15+
 - The [`frappe_whatsapp`](https://github.com/shridarpatil/frappe_whatsapp) app installed on the same site
-- `ffmpeg` (optional but recommended) — for transcoding voice notes to the OGG/OPUS container that Meta's API accepts
 
-Install ffmpeg once on the server:
-
-```bash
-sudo apt install ffmpeg -y
-```
+> **Note:** `ffmpeg` is required for voice-note transcoding, but you don't need to install it yourself. The app depends on [`imageio-ffmpeg`](https://pypi.org/project/imageio-ffmpeg/), which ships with a bundled ffmpeg binary and is installed automatically via `pyproject.toml`.
 
 ## Install on Frappe Cloud
 
