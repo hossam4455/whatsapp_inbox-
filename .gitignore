@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Frontend build output from Vite — ignored everywhere EXCEPT the bundled
+# dist/ that the page loader serves (we commit that one so Frappe Cloud
+# deploys work without a Node build step).
+frontend/dist/
+
+# Frappe / bench
+node_modules/
+.env
+*.log
+
+# Frontend build artifacts — Frappe Cloud rebuilds on deploy
+frontend/node_modules/
+frontend/dist/
+
+# Keep the built bundle committed so the page loader can serve it out of the box
+# (comment out the next two lines if you want Frappe Cloud to rebuild instead)
+# whatsapp_inbox/public/dist/
+
+# Legacy public/js and public/css — we now serve from /dist/
+# Leaving them tracked so older sites keep working during rollout.
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Secrets (double-guard — these shouldn't exist in the app folder anyway)
+*.pem
+*.key
+site_config.json
+common_site_config.json
+
+# Backups of doctype JSON edits
+*.bak
+*.bak.*
+
+# Temp scripts
+/tmp_*
+scripts/*.tmp

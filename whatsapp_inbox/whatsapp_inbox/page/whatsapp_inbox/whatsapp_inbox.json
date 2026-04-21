@@ -1,0 +1,20 @@
+{
+ "content": null,
+ "creation": "2026-04-20 10:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-04-20 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "WhatsApp Inbox",
+ "name": "whatsapp-inbox",
+ "owner": "Administrator",
+ "page_name": "whatsapp-inbox",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "المدير العام"}
+ ],
+ "standard": "Yes",
+ "system_page": 0,
+ "title": "WhatsApp Inbox"
+}

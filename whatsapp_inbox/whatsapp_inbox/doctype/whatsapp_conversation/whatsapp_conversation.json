@@ -1,0 +1,195 @@
+{
+ "actions": [],
+ "creation": "2026-04-20 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "phone_number",
+  "contact_name",
+  "contact",
+  "column_break_1",
+  "assigned_to",
+  "status",
+  "priority",
+  "section_break_2",
+  "last_message_at",
+  "last_message_preview",
+  "last_message_type",
+  "unread_count",
+  "column_break_3",
+  "linked_tenant",
+  "linked_owner",
+  "linked_property",
+  "section_break_4",
+  "first_response_time",
+  "total_messages",
+  "column_break_5",
+  "tags_list",
+  "internal_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "رقم الهاتف",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "اسم العميل"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Link",
+   "label": "جهة الاتصال",
+   "options": "WhatsApp Contact"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الموظف المسؤول",
+   "options": "User"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة",
+   "options": "Active\nPending\nReplied\nEscalated\nClosed",
+   "reqd": 1
+  },
+  {
+   "default": "Normal",
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "الأولوية",
+   "options": "Low\nNormal\nHigh\nUrgent"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break",
+   "label": "آخر رسالة"
+  },
+  {
+   "fieldname": "last_message_at",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "وقت آخر رسالة"
+  },
+  {
+   "fieldname": "last_message_preview",
+   "fieldtype": "Small Text",
+   "label": "معاينة آخر رسالة"
+  },
+  {
+   "fieldname": "last_message_type",
+   "fieldtype": "Select",
+   "label": "نوع آخر رسالة",
+   "options": "\nIncoming\nOutgoing"
+  },
+  {
+   "default": "0",
+   "fieldname": "unread_count",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "غير مقروءة"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "linked_tenant",
+   "fieldtype": "Link",
+   "label": "المستأجر",
+   "options": "Tenant"
+  },
+  {
+   "fieldname": "linked_owner",
+   "fieldtype": "Link",
+   "label": "المالك",
+   "options": "Property Owner"
+  },
+  {
+   "fieldname": "linked_property",
+   "fieldtype": "Link",
+   "label": "العقار",
+   "options": "Property"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break",
+   "label": "إحصائيات"
+  },
+  {
+   "fieldname": "first_response_time",
+   "fieldtype": "Int",
+   "label": "وقت أول رد (دقائق)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_messages",
+   "fieldtype": "Int",
+   "label": "إجمالي الرسائل",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tags_list",
+   "fieldtype": "Small Text",
+   "label": "التصنيفات"
+  },
+  {
+   "fieldname": "internal_notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات داخلية"
+  }
+ ],
+ "idx": 0,
+ "is_submittable": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-04-20 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "WhatsApp Inbox",
+ "name": "WhatsApp Conversation",
+ "naming_rule": "Expression",
+ "autoname": "WCONV-.YYYY.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "phone_number,contact_name,assigned_to",
+ "sort_field": "last_message_at",
+ "sort_order": "DESC",
+ "title_field": "contact_name",
+ "track_changes": 1
+}
