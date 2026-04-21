@@ -2,18 +2,6 @@
 
 A modern WhatsApp conversation management app for Frappe / ERPNext, built with Vue 3.
 
-## Features
-
-- 💬 **Unified inbox** — conversation list, live chat, and context dashboard in one screen
-- ⚡ **Real-time** messaging via Frappe's socket.io (incoming messages, status updates, conversation changes)
-- 🎙️ **Voice messages** — record with push-to-talk, waveform playback, playback speed (1x/1.5x/2x), heard indicator, optional Whisper transcription
-- 🖼️ **Full media** — images, video, documents (PDF/Word/etc), stickers, location, reactions, voice notes
-- 📣 **Campaigns** — bulk WhatsApp Message management with per-recipient delivery/read/failure breakdown
-- 📄 **Templates** — list + preview with a WhatsApp-style phone mockup
-- 📊 **Analytics** — response time, agent leaderboard, SLA breakdown, team distribution
-- ⚙️ **Settings** — working hours, holidays, timezone (foundation for auto-reply scheduling)
-- 🔁 **Retry** failed outgoing messages in one click
-
 ## Requirements
 
 - Frappe v15+
