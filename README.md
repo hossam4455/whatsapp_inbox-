@@ -58,18 +58,6 @@ bench restart
 3. Toggle **Enabled** in WhatsApp Settings → Save
 4. Open the inbox at: `/app/whatsapp-inbox`
 
-## Optional: OpenAI Whisper transcription
-
-Add to your `sites/YOUR-SITE/site_config.json`:
-
-```json
-{
-  "openai_api_key": "sk-..."
-}
-```
-
-Then clicking the **نص** button on any voice message will transcribe it.
-
 ## License
 
 MIT
