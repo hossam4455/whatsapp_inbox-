@@ -83,7 +83,8 @@ app_license = "mit"
 # ------------
 
 # before_install = "whatsapp_inbox.install.before_install"
-# after_install = "whatsapp_inbox.install.after_install"
+after_install = "whatsapp_inbox.install.after_install"
+after_migrate = "whatsapp_inbox.install.after_migrate"
 
 # Uninstallation
 # ------------

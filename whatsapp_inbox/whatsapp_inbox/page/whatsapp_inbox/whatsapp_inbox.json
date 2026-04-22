@@ -1,20 +1,26 @@
 {
  "content": null,
- "creation": "2026-04-20 10:00:00.000000",
+ "creation": "2026-04-20 10:00:00",
  "docstatus": 0,
  "doctype": "Page",
  "idx": 0,
- "modified": "2026-04-20 10:00:00.000000",
+ "modified": "2026-04-22 18:14:12.397095",
  "modified_by": "Administrator",
  "module": "WhatsApp Inbox",
  "name": "whatsapp-inbox",
  "owner": "Administrator",
  "page_name": "whatsapp-inbox",
  "roles": [
-  {"role": "System Manager"},
-  {"role": "المدير العام"}
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "WhatsApp Inbox User"
+  }
  ],
+ "script": null,
  "standard": "Yes",
+ "style": null,
  "system_page": 0,
  "title": "WhatsApp Inbox"
 }
