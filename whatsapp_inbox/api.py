@@ -164,10 +164,71 @@ def get_messages(conversation, page=1, page_length=50):
     }
 
 
+def _is_admin(user=None):
+    user = user or frappe.session.user
+    roles = frappe.get_roles(user)
+    return ("Administrator" == user) or ("System Manager" in roles)
+
+
+def _check_lock(conv):
+    """Raise if the current user is not the one who locked the conversation.
+
+    Admins/System Managers can always reply. If `assigned_to` is empty the
+    conversation is free — anyone may reply."""
+    if _is_admin():
+        return
+    holder = conv.assigned_to
+    if not holder:
+        return
+    if holder != frappe.session.user:
+        full = frappe.db.get_value("User", holder, "full_name") or holder
+        frappe.throw(_("🔒 هذه المحادثة محجوزة حالياً مع {0}").format(full),
+                     title=_("غير مسموح بالرد"))
+
+
+@frappe.whitelist()
+def acquire_conversation_lock(conversation):
+    """Lock a conversation to the current user. If another user already
+    holds the lock, return who — UI will show a banner instead of locking."""
+    conv = frappe.get_doc("WhatsApp Conversation", conversation)
+    current = frappe.session.user
+
+    # Already mine → nothing to do
+    if conv.assigned_to == current:
+        return {"locked": True, "holder": current, "mine": True}
+
+    # Someone else holds it → leave it
+    if conv.assigned_to and conv.assigned_to != current:
+        full = frappe.db.get_value("User", conv.assigned_to, "full_name") or conv.assigned_to
+        return {
+            "locked": True,
+            "mine": False,
+            "holder": conv.assigned_to,
+            "holder_name": full,
+        }
+
+    # Free → acquire
+    frappe.db.set_value("WhatsApp Conversation", conv.name, "assigned_to", current)
+    frappe.db.commit()
+    return {"locked": True, "holder": current, "mine": True}
+
+
+@frappe.whitelist()
+def release_conversation_lock(conversation):
+    """Clear the lock only if the caller holds it. Admins can force-release."""
+    conv = frappe.get_doc("WhatsApp Conversation", conversation)
+    if conv.assigned_to and conv.assigned_to != frappe.session.user and not _is_admin():
+        return {"released": False, "reason": "not_holder"}
+    frappe.db.set_value("WhatsApp Conversation", conv.name, "assigned_to", None)
+    frappe.db.commit()
+    return {"released": True}
+
+
 @frappe.whitelist()
 def send_reply(conversation, message):
     """Send a text reply to a conversation."""
     conv = frappe.get_doc("WhatsApp Conversation", conversation)
+    _check_lock(conv)
 
     # Create outgoing WhatsApp Message
     msg = frappe.get_doc({
@@ -245,6 +306,7 @@ def send_media(conversation, file_url, filename, content_type="document", captio
     import hashlib
 
     conv = frappe.get_doc("WhatsApp Conversation", conversation)
+    _check_lock(conv)
 
     # Rename file to English name for Meta API compatibility
     if file_url and not file_url.startswith("http"):

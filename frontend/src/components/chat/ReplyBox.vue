@@ -1,5 +1,10 @@
 <template>
-  <div class="reply-box">
+  <div class="reply-box" :class="{ 'reply-locked': disabled }">
+    <!-- Lock overlay -->
+    <div v-if="disabled" class="reply-lock-overlay">
+      <span>{{ disabledMessage || '🔒 لا يمكنك الرد حالياً' }}</span>
+    </div>
+
     <!-- File preview -->
     <div v-if="selectedFile" class="reply-file-preview">
       <img v-if="isImage" :src="filePreview" class="reply-file-thumb" />
@@ -73,7 +78,11 @@ const inputRef = ref(null);
 const fileInput = ref(null);
 const selectedFile = ref(null);
 const filePreview = ref('');
-defineProps({ sending: Boolean });
+const props = defineProps({
+  sending: Boolean,
+  disabled: { type: Boolean, default: false },
+  disabledMessage: { type: String, default: '' },
+});
 
 const MAX_SECONDS = 300; // 5 minutes
 const MAX_BYTES = 15 * 1024 * 1024; // 15 MB (Meta limit is 16)
@@ -308,3 +317,27 @@ onUnmounted(() => {
   cancelRecording();
 });
 </script>
+
+<style scoped>
+.reply-box {
+  position: relative;
+}
+.reply-box.reply-locked {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.reply-lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(254, 226, 226, 0.85);
+  color: #991b1b;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 5;
+  pointer-events: auto;
+  cursor: not-allowed;
+}
+</style>
